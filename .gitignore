@@ -1,0 +1,35 @@
+#carpeta media
+media/
+
+
+# Ignorar carpetas __pycache__
+__pycache__/
+__pycache__/**
+
+# Ignorar migraciones de la base de datos
+*/migrations/
+
+# Ignorar archivos compilados de Python
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar entornos virtuales
+venv/
+env/
+*.env
+
+# Ignorar archivos de bases de datos locales
+*.sqlite3
+
+# Ignorar archivos de configuración local
+*.local
+*.log
+
+# Ignorar archivos creados por el IDE
+.vscode/
+.idea/
+*.iml
+
+# Ignorar archivos estáticos generados automáticamente
+staticfiles/
