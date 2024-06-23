@@ -1,0 +1,18 @@
+
+services:
+  db:
+    image: postgres:12.19-alpine3.20
+    container_name: citas-1-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    volumes:
+      - db_citas_1_:/var/lib/postgresql/data
+
+# Definición de los volúmenes
+volumes:
+  db_citas_1_:
+    external: false
