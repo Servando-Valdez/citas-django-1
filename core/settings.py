@@ -43,6 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #local apps
+    "apps.home",
+    "apps.users",
+
     #third libraries
     'django_htmx',
     # The following apps are required:
@@ -61,8 +65,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    # Add the account middleware:
+    # # Add the account middleware:
     "allauth.account.middleware.AccountMiddleware",
+
+    # Needed to login by username in Django admin, regardless of `allauth`
+    #'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    #'allauth.account.auth_backends.AuthenticationBackend',
+
     # Add the htmx middleware:
     'django_htmx.middleware.HtmxMiddleware',
 ]
@@ -81,7 +92,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 #`allauth` needs this from django
-                'django.template.context_processors.request'
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -155,10 +166,27 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = "/"
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# Add django-allauth settings
+
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = True
+ACCOUNT_LOGOUT_ON_GET = True
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+# ACCOUNT_FORMS = {
+    #'login': 'apps.users.forms.CustomLoginForm',
+    #'signup': 'apps.users.forms.CustomSignupForm',
+# }
+
 
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
 EMAIL_HOST = os.getenv('EMAIL_HOST')
