@@ -21,25 +21,37 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="{% static 'assets/css/sb-admin-2.min.css' %}" rel="stylesheet">
 
 	{% block css %}{% endblock css %}
 </head>
 
 <body class="app" id="page-top">
 	<div id="wrapper">
-		<!-- Navbar -->
-		{% comment %} {% include 'includes/navbar.html' %} {% endcomment %}
 		
 		<!-- Sidebar -->
 		{% include 'includes/sidebar.html' %}
+		<!-- End of Sidebar -->
 
-	</header><!--//app-header-->
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
 
-		{% block content %}
-		<!-- Here we'll add the new content -->
-		{% endblock %}
+			<!--Navbar-->
+			{% include 'includes/navbar.html' %}
+			<!--End of Navbar-->
 
+			<!-- Main Content -->
+			<div id="content">
+
+				{% block content %}
+				<!-- Here we'll add the new content -->
+				{% endblock %}
+			</div><!-- End of Main Content -->
+		</div><!-- End of Content Wrapper -->
+	</div> <!-- End of Page Wrapper -->
+
+	<!-- Modal logout -->
+	{% include 'includes/modal_logout.html' %}
 
 	<script src="https://unpkg.com/htmx.org@1.9.2"></script>
 
