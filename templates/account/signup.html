@@ -1,3 +1,5 @@
+{% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Login</title>
+    <title>Register</title>
 
     <!-- Custom fonts for this template-->
     <link href="{% static 'assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -26,90 +28,57 @@
 
     <div class="container">
 
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image">
+                        <img
+                        src="https://thumbs.dreamstime.com/b/perrito-feliz-7133701.jpg"
+                        alt="login"
+                        class="img-fluid w-100 h-100 position-absolute top-0 start-0"
+                        style="object-fit: cover;"
+                        >
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            </div>
+                            <form class="user" method="post"  action="{% url 'account_signup' %}">
+                                {% csrf_token %}
 
-            <div class="col-xl-10 col-lg-12 col-md-9">
-
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                                    </div>
-                                    {% comment %} <form class="user" > {% endcomment %}
-                                    <form class="user" method="post" action="{% url 'account_login' %}">
-
-                                        {% csrf_token %}
-                                        {% comment %} errorlist nonfield {% endcomment %}
-                                        <div class="mb-3">
-                                            {% if form.non_field_errors %}
-                                                <div class="text-danger">{{ form.non_field_errors }}</div>
-                                            {% endif %}
-                                        </div>
-
-                                        <div class="form-group">
-                                            {% comment %} <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address..."> {% endcomment %}
-                                                <input 
-                                                    id="id_login" 
-                                                    name="login" 
-                                                    type="email" 
-                                                    class="form-control form-control-user" 
-                                                    placeholder="Enter Email Address..." 
-                                                    required="required"
-                                                    aria-describedby="emailHelp"
-                                                >
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
-                                        </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </a>
-                                        <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
-                                        </a>
-                                        <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                        </a>
-                                    </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="{% url 'account_signup' %}">Create an Account!</a>
-                                    </div>
+                                <div class="mb-3">
+                                    {% if form.non_field_errors %}
+                                        <div class="text-danger">{{ form.non_field_errors }}</div>
+                                    {% endif %}
                                 </div>
+
+                                {% for field in form %}
+                                    {{ field|as_crispy_field }}
+                                {% endfor %}
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    Register Account
+                                </button> 
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="{% url 'account_reset_password' %}">Forgot Password?</a>
+                            </div>
+                            <div class="text-center">
+                                <a class="small" href="{% url 'account_login' %}">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
 
     </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="{% static 'assets/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
