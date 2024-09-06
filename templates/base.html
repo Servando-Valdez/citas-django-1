@@ -31,9 +31,15 @@
 		{% include 'includes/sidebar.html' %}
 
 	</header><!--//app-header-->
+	
+	<div id="content-block">
+		{% block content %}
+		<!-- Aquí se cargará el nuevo contenido -->
+		{% endblock %}
+	</div>
 
-	{% block content %}{% endblock content %}
 
+	<script src="https://unpkg.com/htmx.org@1.9.2"></script>
 
 	<!-- Javascript -->
 	<script src="{% static 'assets/plugins/popper.min.js' %}"></script>
