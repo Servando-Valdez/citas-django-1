@@ -14,43 +14,51 @@
 
 	<link rel="shortcut icon" href="favicon.ico">
 
-	<!-- FontAwesome JS-->
-	{% comment %} <script defer src="assets/plugins/fontawesome/js/all.min.js"></script> {% endcomment %}
-    <script  src="{% static 'assets/plugins/fontawesome/js/all.min.js' %}"></script>
-	<!-- App CSS -->
-	<link id="theme-style" rel="stylesheet" href="{% static 'assets/css/portal.css' %}">
+	<!-- Custom fonts for this template-->
+    <link href="{% static 'assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
 	{% block css %}{% endblock css %}
 </head>
 
-<body class="app">
-	<header class="app-header fixed-top">
+<body class="app" id="page-top">
+	<div id="wrapper">
 		<!-- Navbar -->
-		{% include 'includes/navbar.html' %}
+		{% comment %} {% include 'includes/navbar.html' %} {% endcomment %}
 		
 		<!-- Sidebar -->
 		{% include 'includes/sidebar.html' %}
 
 	</header><!--//app-header-->
-	
-	<div id="content-block">
+
 		{% block content %}
-		<!-- Aquí se cargará el nuevo contenido -->
+		<!-- Here we'll add the new content -->
 		{% endblock %}
-	</div>
 
 
 	<script src="https://unpkg.com/htmx.org@1.9.2"></script>
 
-	<!-- Javascript -->
-	<script src="{% static 'assets/plugins/popper.min.js' %}"></script>
-	<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+	<!-- Bootstrap core JavaScript-->
+	<script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+	<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
-	<!-- Charts JS -->
-	<script src="{% static 'assets/plugins/chart.js/chart.min.js' %}"></script>
-	<script src="{% static 'assets/js/index-charts.js' %}"></script>
+	<!-- Core plugin JavaScript-->
+	<script src="{% static 'assets/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
 
-	<!-- Page Specific JS -->
-	<script src="{% static 'assets/js/app.js' %}"></script>
+	<!-- Custom scripts for all pages-->
+	<script src="{% static 'assets/js/sb-admin-2.min.js' %}"></script>
+
+	<!-- Page level plugins -->
+	<script src="{% static 'assets/vendor/chart.js/Chart.min.js' %}"></script>
+
+	<!-- Page level custom scripts -->
+	<script src="{% static 'assets/js/demo/chart-area-demo.js' %}"></script>
+	<script src="{% static 'assets/js/demo/chart-pie-demo.js' %}"></script>
 
 </body>
 

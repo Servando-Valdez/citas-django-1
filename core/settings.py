@@ -50,6 +50,9 @@ INSTALLED_APPS = [
 
     #third libraries
     'django_htmx',
+    'django_filters',
+    'crispy_forms',
+    'crispy_bootstrap5',
     # The following apps are required:
     'allauth',
     'allauth.account',
@@ -78,6 +81,11 @@ MIDDLEWARE = [
     # Add the htmx middleware:
     'django_htmx.middleware.HtmxMiddleware',
 ]
+
+#Add bootstrap5 to crispy forms
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 ROOT_URLCONF = 'core.urls'
 
