@@ -182,6 +182,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = True
 ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_UNIQUE_EMAIL = True
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -191,10 +192,10 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-# ACCOUNT_FORMS = {
+ACCOUNT_FORMS = {
     #'login': 'apps.users.forms.CustomLoginForm',
-    #'signup': 'apps.users.forms.CustomSignupForm',
-# }
+    'signup': 'apps.users.forms.CustomSignupForm',
+}
 
 
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
