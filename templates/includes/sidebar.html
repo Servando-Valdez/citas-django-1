@@ -14,7 +14,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item {% if request.resolver_match.app_name == '' %}active{%endif%}">
         <a class="nav-link" href="{% url 'home' %}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
@@ -28,9 +28,16 @@
         Interface
     </div>
 
+    <!-- Nav Item - Services -->
+    <li class="nav-item {% if request.resolver_match.app_name == 'services' %} active {% endif %} collapsed">
+        <a class="nav-link" href="{% url 'services:index' %}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Services</span></a>
+    </li>
+
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
             <span>Components</span>
