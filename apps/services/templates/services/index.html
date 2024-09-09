@@ -4,6 +4,7 @@
 {% block title %}Services{% endblock title %}
 
 {% block css%}
+<link rel="stylesheet" href="{% static 'assets/css/sb-admin-2.css' %}" />
 {% endblock %}
 
 {% block content %}
@@ -56,14 +57,18 @@
             
                                     <td class="text-center">
                                         {% comment %} <a href="{% url 'services:detail' pk=service.id %}" class="btn btn-info btn-sm">Detail</a> {% endcomment %}
-                                        <a href="{% url 'services:update' pk=service.id %}" class="btn btn-primary btn-sm">Edit</a>
-                                        <a class="btn btn-danger btn-sm"
+                                        <a href="{% url 'services:update' pk=service.id %}" class="btn btn-primary btn-sm btn-circle">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a class="btn btn-danger btn-sm btn-circle"
                                             role="button"
                                             data-bs-toggle="modal"
                                             onclick="destroy({{ service.id }})"
                                             data-bs-target="#delete-modal"
                                             href="#"
-                                        >Delete</a>
+                                        >
+                                            <i class="fa fa-trash"></i>
+                                    </a>
                                     </td>
                                 </tr>
                             {% endfor %}
