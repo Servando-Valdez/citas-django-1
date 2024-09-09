@@ -19,7 +19,16 @@
             <h1 class="fs-3 mb-4 fw-bold ">Titulo</h1>
         </div>
         <div class="col-12 col-sm-6 col-md-6 d-flex justify-content-end align-items-center">
-            <a class="btn btn-primary" role="button" href="#">
+            {% comment %} <a class="btn btn-primary" role="button" href="#"
+                data-bs-toggle="tooltip" data-bs-placement="top"
+                hx-get="{% url 'services:create' %}"
+                hx-target="#dialogCreate"
+                hx-trigger="click"
+                hx-swap="innerHTML"
+            >
+                <i class="fa fa-plus"></i> &nbsp;Agregar
+            </a> {% endcomment %}
+            <a class="btn btn-primary" role="button" href="{% url 'services:create' %}">
                 <i class="fa fa-plus"></i> &nbsp;Agregar
             </a>
         </div>
@@ -70,6 +79,50 @@
             {% include 'pagination.html' %}
         </div>
     </div>
-    
+
 </div>
+{% comment %} <div class="modal fade" id="CreateModal" tabindex="-1" aria-labelledby="CreateModalLabel" aria-hidden="true">
+    <div id="dialogCreate" class="modal-dialog modal-dialog-scrollable modal-lg rounded" hx-target="this">
+    </div>
+</div>  {% endcomment %}
+
+<div class="modal fade" id="CreateModal" tabindex="-1" aria-labelledby="CreateModalLabel" aria-hidden="true">
+    <div id="dialogCreate" class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" hx-target="this">
+        <!-- Aquí se cargará dinámicamente el contenido del modal con HTMX -->
+    </div>
+</div>
+<a class="border rounded d-inline scroll-to-top" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+{% endblock %}
+
+{% block js %}
+<script>
+;    (function () {
+        const modalEliminar = new bootstrap.Modal(document.getElementById('CreateModal'));
+    
+        htmx.on("htmx:afterSwap", (e) => {
+            if (e.detail.target.id == "dialogCreate") {
+                modalEliminar.show()
+            }
+        })
+    
+        htmx.on("htmx:beforeSwap", (e) => {
+            // console.log(e.detail.target.id == "dialogEliminar" && !e.detail.xhr.response)
+            if (e.detail.target.id == "dialogCreate" && e.detail.xhr.response == 200) {
+                console.log("entro")
+                modalEliminar.hide()
+                e.detail.shouldSwap = false
+                console.log(e.detail.xhr.status)
+                if (e.detail.xhr.status == 200){
+                    window.location.reload();
+                }
+            }
+        })
+    
+        htmx.on("hidden.bs.modal", () => {
+            document.getElementById("dialogCreate").innerHTML = ""
+        })
+    })(); 
+</script>
 {% endblock %}

@@ -1,0 +1,83 @@
+{% load crispy_forms_tags %}
+{% comment %} <form id="CreateForm" method="post" hx-post="{{request.path}}" role="form" hx-encoding="multipart/form-data">
+    <div class="row" >
+        <div class="col-md-12 bg-white" style="text-align: left;">
+            <div class="row">
+                {% for field in form %}
+                    <div class="col-6">
+                        {{field|as_crispy_field}}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="text-end m-0 p-2">
+                <button class="btn btn-primary" type="submit">Guardar</button>
+                <a href="{{ request.path }}" class="btn btn-secondary reset" type="button">Cancelar</a>
+            </div>
+        </div>
+    </div>
+</form> {% endcomment %}
+
+<form id="CreateForm" method="post" hx-post="{{ request.path }}" role="form" hx-encoding="multipart/form-data">
+    {% csrf_token %}
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title fs-5 fw-bold" title="Deshabilitar">Create service</h2>
+                <button type="button" class="" data-bs-dismiss="modal" aria-label="Close">x</button>
+        </div>
+
+        <div class="modal-body">
+            <div class="text-dark row">
+                    
+                {% for field in form %}
+                    {% comment %} <div class="col-12 col-md-6">
+                        {{ field|as_crispy_field }}
+                    </div> {% endcomment %}
+                    
+                    {% if field.field.widget.input_type == "text" or field.field.widget.input_type == "number"  %}
+                        <div class="col-12 col-md-6">
+                            {{ field|as_crispy_field }}
+                        </div>
+                    {% else %}
+                        <div class="col-12">
+                            {{ field|as_crispy_field }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-light" type="button" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary" type="submit">Create</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% comment %} <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+        <form id="CreateForm" method="post" hx-post="{{ request.path }}" role="form" hx-encoding="multipart/form-data">
+            {% csrf_token %}
+            <div class="modal-header">
+                <h2 class="modal-title fs-5 fw-bold">Create service</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="text-dark row">
+                    
+                    {% for field in form %}
+                        <div class="col-6">
+                            {{ field|as_crispy_field }}
+                        </div>
+                    {% endfor %}
+                        
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary" type="submit">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div> {% endcomment %}
