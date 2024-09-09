@@ -22,17 +22,14 @@
     <div class="modal-content">
         <div class="modal-header">
             <h2 class="modal-title fs-5 fw-bold" title="Createtitle">Create service</h2>
-                <button type="button" class="" data-bs-dismiss="modal" aria-label="Close">x</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                {% comment %} <button type="button" class="" data-bs-dismiss="modal" aria-label="Close">x</button> {% endcomment %}
         </div>
 
         <div class="modal-body">
             <div class="text-dark row">
                     
                 {% for field in form %}
-                    {% comment %} <div class="col-12 col-md-6">
-                        {{ field|as_crispy_field }}
-                    </div> {% endcomment %}
-                    
                     {% if field.field.widget.input_type == "text" or field.field.widget.input_type == "number"  %}
                         <div class="col-12 col-md-6">
                             {{ field|as_crispy_field }}
@@ -46,6 +43,7 @@
             </div>
 
             <div class="modal-footer">
+                {% comment %} <button class="btn btn-light" type="button" data-bs-dismiss="modal">Cancelar</button> {% endcomment %}
                 <button class="btn btn-light" type="button" data-bs-dismiss="modal">Cancelar</button>
                 <button class="btn btn-primary" type="submit">Create</button>
             </div>
