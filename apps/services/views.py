@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 #import success message
 from django.contrib.messages.views import SuccessMessageMixin
 from django_filters.views import FilterView
@@ -43,3 +43,8 @@ class ServicesUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Update Service'
         return context
+    
+class ServicesDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    model = Services
+    success_url = reverse_lazy('services:index')
+    success_message = 'Service was deleted successfully'

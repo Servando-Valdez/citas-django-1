@@ -57,7 +57,13 @@
                                     <td class="text-center">
                                         {% comment %} <a href="{% url 'services:detail' pk=service.id %}" class="btn btn-info btn-sm">Detail</a> {% endcomment %}
                                         <a href="{% url 'services:update' pk=service.id %}" class="btn btn-primary btn-sm">Edit</a>
-                                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                                        <a class="btn btn-danger btn-sm"
+                                            role="button"
+                                            data-bs-toggle="modal"
+                                            onclick="destroy({{ service.id }})"
+                                            data-bs-target="#delete-modal"
+                                            href="#"
+                                        >Delete</a>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -80,12 +86,51 @@
         <!-- Aquí se cargará dinámicamente el contenido del modal con HTMX -->
     </div>
 </div>
+
+<form id="deleteForm" method="post">
+    {% csrf_token %}
+    <div class="modal fade" role="dialog" tabindex="-1" id="delete-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5 color_guinda fw-bold">Delete element</h2>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="fs-6 text-dark">If you delete this item, it will not be possible to recover it.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-light" type="button" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger" type="button" onclick="formSubmit()">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
 <a class="border rounded d-inline scroll-to-top" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
 {% endblock %}
 
 {% block js %}
+
+<script>
+    function destroy(id) {
+        let queryParams = new URLSearchParams(window.location.search);
+        let url = "{% url 'services:delete' 1 %}";
+        url = url.replace('1', id);
+        url = url + '?' + queryParams.toString();
+        $("#deleteForm").attr('action', url);
+    }
+
+    function formSubmit() {
+        $("#deleteForm").submit();
+    }
+</script>
 <script>
 ;    (function () {
         const modalEliminar = new bootstrap.Modal(document.getElementById('CreateModal'));
