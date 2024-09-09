@@ -9,7 +9,7 @@ class ServiceForm(ModelForm):
 
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'price': forms.NumberInput(attrs={'class': 'form-control'}),
+            'price': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
         }
 
