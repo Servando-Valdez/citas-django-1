@@ -27,3 +27,19 @@ class ServicesCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('services:index')
     success_message = 'Service was created successfully'
 
+    def get_context_data(self, **kwargs) :
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Create Service'
+        return context
+
+class ServicesUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Services
+    template_name = 'services/create.html'
+    form_class = ServiceForm
+    success_url = reverse_lazy('services:index')
+    success_message = 'Service was updated successfully'
+
+    def get_context_data(self, **kwargs) :
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Update Service'
+        return context

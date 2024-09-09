@@ -24,9 +24,9 @@
 
     <!-- Formulario -->
     <div class="row justify-content-center m-sm-1">
-        <h1 class="fs-3 fw-bold text-center">Create Service</h1>
+        <h1 class="fs-3 fw-bold text-center">{{title}}</h1>
         <div class="col-lg-8 col-md-10 col-sm-12  bg-white border rounded p-4 shadow">
-            <form method="post" action="{% url 'services:create' %}" class="text-black">
+            <form method="post" class="text-black">
                 {% csrf_token %}
                 <div class="row g-3">
                     <!-- Recorremos los campos del formulario -->
