@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "apps.home",
     "apps.users",
     "apps.services",
+    "apps.appointments",
 
     #third libraries
     'django_htmx',

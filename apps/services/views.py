@@ -61,7 +61,6 @@ class ServicesUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     def post(self, request: HttpRequest, *args: str, **kwargs):
         self.object = self.get_object()
         form = self.get_form()
-
         if not form.is_valid():
             context = self.get_context_data()
             context['form'] = form
