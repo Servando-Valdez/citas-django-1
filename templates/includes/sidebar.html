@@ -35,6 +35,14 @@
             <span>Services</span></a>
     </li>
 
+    <!-- Nav Item - Service -->
+    <li class="nav-item {% if request.resolver_match.app_name == 'appointments' %} active {% endif %} collapsed">
+        <a class="nav-link" href="{% url 'appointments:index' %}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Appointments</span></a>
+    </li>
+
+
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo"
