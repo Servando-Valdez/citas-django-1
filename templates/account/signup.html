@@ -45,7 +45,7 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user" method="post"  action="{% url 'account_signup' %}">
+                            <form class="user row" method="post"  action="{% url 'account_signup' %}">
                                 {% csrf_token %}
 
                                 <div class="mb-3">
@@ -55,7 +55,15 @@
                                 </div>
 
                                 {% for field in form %}
-                                    {{ field|as_crispy_field }}
+                                    {% if field.field.widget.input_type == 'password' %}
+                                        <div class="col-12">
+                                            {{ field|as_crispy_field }}
+                                        </div>
+                                    {% else %}
+                                        <div class="col-md-6 col-sm-12">
+                                            {{ field|as_crispy_field }}
+                                        </div>
+                                    {% endif %}
                                 {% endfor %}
                                 <button type="submit" class="btn btn-primary btn-block">
                                     Register Account

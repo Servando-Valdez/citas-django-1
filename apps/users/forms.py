@@ -9,6 +9,20 @@ class CustomSignupForm(SignupForm):
         required=True,
     )
 
+    first_name = forms.CharField(
+        label="First Name",
+        widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "First Name"}),
+        required=True,
+        max_length=50,
+    )
+
+    last_name = forms.CharField(
+        label="Last Name",
+        widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Last Name"}),
+        required=True,
+        max_length=50,
+    )
+
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
