@@ -8,5 +8,85 @@
 {% endblock %}
 
 {% block content %}
-This is the appointments page
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 my-4">
+        </div>
+        <div class="col-12 col-sm-6 col-md-6 d-flex justify-content-start align-items-center">
+            <h1 class="fs-3 mb-4 fw-bold ">{{title}}</h1>
+        </div>
+        <div class="col-12 col-sm-6 col-md-6 d-flex justify-content-end align-items-center">
+            <a class="btn btn-primary" role="button" href="#"
+                data-bs-toggle="tooltip" data-bs-placement="top"
+                hx-get="#"
+                hx-target="#dialogCreate"
+                hx-trigger="click"
+                hx-swap="innerHTML"
+            >
+                <i class="fa fa-plus"></i> &nbsp;Agregar
+            </a>
+        </div>
+    </div>
+
+    {% include 'includes/filter.html' %}
+
+    <div class="border rounded bg-white">
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table rounded">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Service</th>
+                                <th class="text-center">Date</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for appointment in appointments %}
+                                <tr class="text-center">
+                                    <td>{{ appointment.service }}</td>
+                                    <td>{{ appointment.date }}</td>
+                                    <td>{{ appointment.price }}</td>
+            
+                                    <td class="text-center">
+                                        {% comment %} <a href="{% url 'services:detail' pk=service.id %}" class="btn btn-info btn-sm">Detail</a> {% endcomment %}
+                                        <a href="#"
+                                            class="btn btn-primary btn-sm btn-circle"
+                                            {% comment %} role="button"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-placement="top"
+                                            hx-get="{% url 'services:update' pk=service.id %}"
+                                            hx-target="#dialogCreate"
+                                            hx-trigger="click"
+                                            hx-swap="innerHTML" {% endcomment %}
+                                            >
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a class="btn btn-danger btn-sm btn-circle"
+                                            {% comment %} role="button"
+                                            data-bs-toggle="modal"
+                                            onclick="destroy({{ service.id }})"
+                                            data-bs-target="#delete-modal" {% endcomment %}
+                                            href="#"
+                                        >
+                                            <i class="fa fa-trash"></i>
+                                    </a>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center text-white fw-bold bg-gray-700">No hay citas disponibles</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% include 'pagination.html' %}
+        </div>
+    </div>
+
+</div>
 {% endblock %}
