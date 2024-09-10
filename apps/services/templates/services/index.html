@@ -57,7 +57,16 @@
             
                                     <td class="text-center">
                                         {% comment %} <a href="{% url 'services:detail' pk=service.id %}" class="btn btn-info btn-sm">Detail</a> {% endcomment %}
-                                        <a href="{% url 'services:update' pk=service.id %}" class="btn btn-primary btn-sm btn-circle">
+                                        <a href="#"
+                                            class="btn btn-primary btn-sm btn-circle"
+                                            role="button"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-placement="top"
+                                            hx-get="{% url 'services:update' pk=service.id %}"
+                                            hx-target="#dialogCreate"
+                                            hx-trigger="click"
+                                            hx-swap="innerHTML"
+                                            >
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <a class="btn btn-danger btn-sm btn-circle"

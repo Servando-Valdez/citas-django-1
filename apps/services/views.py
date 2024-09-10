@@ -48,7 +48,7 @@ class ServicesCreateView(LoginRequiredMixin, CreateView):
 
 class ServicesUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Services
-    template_name = 'services/create.html'
+    template_name = 'services/create2.html'
     form_class = ServiceForm
     success_url = reverse_lazy('services:index')
     success_message = 'Service was updated successfully'
@@ -57,6 +57,20 @@ class ServicesUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Update Service'
         return context
+    
+    def post(self, request: HttpRequest, *args: str, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+
+        if not form.is_valid():
+            context = self.get_context_data()
+            context['form'] = form
+            return render(request, self.template_name, context)
+        
+        self.object = form.save()
+
+        messages.success(request, 'Service was updated successfully')
+        return HttpResponse(200)
     
 class ServicesDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Services
