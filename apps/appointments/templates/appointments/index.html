@@ -18,7 +18,7 @@
         <div class="col-12 col-sm-6 col-md-6 d-flex justify-content-end align-items-center">
             <a class="btn btn-primary" role="button" href="#"
                 data-bs-toggle="tooltip" data-bs-placement="top"
-                hx-get="#"
+                hx-get="{% url 'appointments:create' %}"
                 hx-target="#dialogCreate"
                 hx-trigger="click"
                 hx-swap="innerHTML"
@@ -39,6 +39,7 @@
                             <tr>
                                 <th class="text-center">Service</th>
                                 <th class="text-center">Date</th>
+                                <th class="text-center">Hour</th>
                                 <th class="text-center">Price</th>
                                 <th class="text-center">Actions</th>
                             </tr>
@@ -48,6 +49,7 @@
                                 <tr class="text-center">
                                     <td>{{ appointment.service }}</td>
                                     <td>{{ appointment.date }}</td>
+                                    <td>{{ appointment.time }}</td>
                                     <td>{{ appointment.price }}</td>
             
                                     <td class="text-center">
@@ -89,4 +91,113 @@
     </div>
 
 </div>
+
+
+<div class="modal fade" id="CreateModal" tabindex="-1" aria-labelledby="CreateModalLabel" aria-hidden="true">
+    <div id="dialogCreate" class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" hx-target="this">
+        <!-- Aquí se cargará dinámicamente el contenido del modal con HTMX -->
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'assets/js/htmx-modal-create.js' %}"></script>
+{% comment %} <script>
+    $(document).ready(function() {
+        $('#id_date').change(function() {
+            var date = $(this).val();
+            var url = "{% url 'appointments:get_occupied_times' %}?date=" + date;
+            $('#time-select').load(url);
+        });
+
+        $('#id_service').change(function() {
+            console.log("Cambiando fecha");
+        });
+    });
+</script> {% endcomment %}
+
+{% comment %} <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Escucha el evento `htmx:afterSwap` para el contenido cargado
+        htmx.on("htmx:afterSwap", function(e) {
+            console.log("Contenido cargado.");
+
+            // Verifica que el target es el modal que quieres
+            if (e.detail.target.id === 'dialogCreate') {
+                console.log("Modal cargado, agregando listener.");
+
+                //with jquery get the input field with id id_date and add an event listener
+                $('#id_date').change(function() {
+                    console.log("Cambiando fecha");
+                    var date = $(this).val();
+                    console.log("Date: ", date);
+                    var url = "{% url 'appointments:get_occupied_times' %}?date=" + date;
+                    $('#time-select').load(url);
+                });
+            }
+        });
+    });
+</script> {% endcomment %}
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script>    
+
+    htmx.on("htmx:afterSwap", (e) => {
+        console.log("Contenido cargado, mostrando modal.");
+        if (e.detail.target.id == "dialogCreate") {
+            let select = document.getElementById('id_time');
+            //add empty option
+            let option = document.createElement('option');
+            option.value = '';
+            option.text = '-- Select a date first --';
+            select.appendChild(option);
+
+        }
+    })
+
+    let onchange_date = (value) => {
+        console.log("Cambiando fecha");
+        var url = "{% url 'appointments:get_occupied_times' %}?date=" + value;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                let select = document.getElementById('id_time');
+                select.innerHTML = '';
+                let option = document.createElement('option');
+                option.value = '';
+                option.text = '-- Select a hour --';
+                select.appendChild(option);
+                console.log(data);
+                data.available_times.forEach(time => {
+                    let option = document.createElement('option');
+                    option.value = time;
+                    option.text = time;
+                    select.appendChild(option);
+                });
+            });
+    }
+
+    {% comment %} document.getElementById("id_date").addEventListener("change", function(){
+        var date = this.value;
+        var url = "{% url 'appointments:get_occupied_times' %}?date=" + date;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+
+                console.log("correct");
+                let select = document.getElementById('id_time');
+                select.innerHTML = '';
+                let option = document.createElement('option');
+                option.value = '';
+                option.text = '-- Selecciona una hora --';
+                select.appendChild(option);
+                console.log(data);
+                data.available_times.forEach(time => {
+                    let option = document.createElement('option');
+                    option.value = time;
+                    option.text = time;
+                    select.appendChild(option);
+                });
+            });
+    }) {% endcomment %}
+</script>
 {% endblock %}
