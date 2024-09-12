@@ -72,9 +72,7 @@
 
 	<!-- Sweet Alert 2 -->
 	{% include 'sweetalert.html' %}
-
-	{% comment %} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> {% endcomment %}
-	{% comment %} <script src="https://unpkg.com/htmx.org@1.6.1/dist/htmx.min.js"></script> {% endcomment %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://unpkg.com/htmx.org@1.9.2"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Bootstrap core JavaScript-->
@@ -84,14 +82,18 @@
 	<script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
 	{% comment %} <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script> {% endcomment %}
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<!-- Core plugin JavaScript-->
-	{% comment %} <script src="{% static 'assets/vendor/jquery-easing/jquery.easing.min.js' %}"></script> {% endcomment %}
 
 	<!-- Custom scripts for all pages-->
 	<script src="{% static 'assets/js/sb-admin-2.min.js' %}"></script>
 
 	<!-- Page level plugins -->
 	<script src="{% static 'assets/vendor/chart.js/Chart.min.js' %}"></script>
+
+	{% comment %} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> {% endcomment %}
+	{% comment %} <script src="https://unpkg.com/htmx.org@1.6.1/dist/htmx.min.js"></script> {% endcomment %}
+
+	<!-- Core plugin JavaScript-->
+	{% comment %} <script src="{% static 'assets/vendor/jquery-easing/jquery.easing.min.js' %}"></script> {% endcomment %}
 
 	<!-- Block of js -->
 	{% block js %}{% endblock js %}
