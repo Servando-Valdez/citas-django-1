@@ -102,42 +102,6 @@
 
 {% block js %}
 <script src="{% static 'assets/js/htmx-modal-create.js' %}"></script>
-{% comment %} <script>
-    $(document).ready(function() {
-        $('#id_date').change(function() {
-            var date = $(this).val();
-            var url = "{% url 'appointments:get_occupied_times' %}?date=" + date;
-            $('#time-select').load(url);
-        });
-
-        $('#id_service').change(function() {
-            console.log("Cambiando fecha");
-        });
-    });
-</script> {% endcomment %}
-
-{% comment %} <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Escucha el evento `htmx:afterSwap` para el contenido cargado
-        htmx.on("htmx:afterSwap", function(e) {
-            console.log("Contenido cargado.");
-
-            // Verifica que el target es el modal que quieres
-            if (e.detail.target.id === 'dialogCreate') {
-                console.log("Modal cargado, agregando listener.");
-
-                //with jquery get the input field with id id_date and add an event listener
-                $('#id_date').change(function() {
-                    console.log("Cambiando fecha");
-                    var date = $(this).val();
-                    console.log("Date: ", date);
-                    var url = "{% url 'appointments:get_occupied_times' %}?date=" + date;
-                    $('#time-select').load(url);
-                });
-            }
-        });
-    });
-</script> {% endcomment %}
 <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <script>    
 
